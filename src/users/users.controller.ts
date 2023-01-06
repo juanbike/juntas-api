@@ -1,17 +1,29 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { agent } from 'supertest';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+
 
 @Controller('users')
 
 
 export class UsersController {
-    @Get()
+    /*
+    @Get() //Recupera todos los usuarios
        getUsers():String{
         return "Hello from UsersController"
     }
 
+    */
 
-    
+    /* Parametros tipo Query
+https://www.youtube.com/watch?v=ur9DDj-kkQM&list=PLzHaXzj_WAym4WR3gBYuy1iew5T3NgL0v&index=26
+quiero los usuarios de sean de caracas y deben estar ordenados por edad
+/users?orderBy=City&searchTerm=age
+
+    */
+@Get() 
+       getUsers(@Query() filtroConsulta):String{
+        const {searchTerm, orderBy} = filtroConsulta
+        return `Todas ${searchTerm} usuarios estan ordenados por ${orderBy}`
+    }
 
 
     /*
