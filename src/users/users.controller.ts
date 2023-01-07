@@ -1,10 +1,12 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
-
+import { UsersService } from './users.service';
+import { User } from './user.entity';
 
 @Controller('users')
-
-
 export class UsersController {
+    constructor(private readonly userService: UsersService){
+
+    }
     /*
     @Get() //Recupera todos los usuarios
        getUsers():String{
@@ -20,9 +22,10 @@ quiero los usuarios de sean de caracas y deben estar ordenados por edad
 
     */
 @Get() 
-       getUsers(@Query() filtroConsulta):String{
+       getUsers(@Query() filtroConsulta):User[]{
         const {searchTerm, orderBy} = filtroConsulta
-        return `Todas ${searchTerm} usuarios estan ordenados por ${orderBy}`
+        return this.userService.getUsers();
+        
     }
 
 
@@ -32,25 +35,29 @@ quiero los usuarios de sean de caracas y deben estar ordenados por edad
     Los parametros nos ayudan a recibir información desde el cliente de una forma simple
     */
     @Get(':id') //users/1
-    getUsers1(@Param() params):string{
-        return `El ID del usuario es ${params.id}`
+    getUser(@Param('id') id:string):User{
+        return this.userService.getUser(id)
     }
 
     @Post()
-    createUser(@Body('message') message: string):string{
-        return `El mensaje es ${message}`
+    createUser(@Body('message') message: string){
+        return this.userService.createUser(message);
     }
 
     //Con el @Body(), definimos que propiedades vamos a actualizar del usuario, claro hay que enviarlo desde el cliente
     @Patch(':id')
-    updateUser(@Param('id') id:string, @Body() age, address){
-        return `El usuario con el Id${id} a sido actualizado`
+    updateUser(@Param('id') id:string, @Body('message') user){
+        return this.userService.updateUser(id, user)
     }
 
     @Delete(':id')
-    deleteUser(@Param('id') id:string){
-        return `El usuario con el Id${id} a sido eliminado`
+    removeUser(@Param('id') id:string):void{
+        return this.userService.removeUser(id);
     }
 
 }
 
+
+/*
+https://www.youtube.com/watch?v=gsEqU_OFx8Y&list=PLzHaXzj_WAym4WR3gBYuy1iew5T3NgL0v&index=27
+*/
