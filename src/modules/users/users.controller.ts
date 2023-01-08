@@ -70,4 +70,6 @@ quiero los usuarios de sean de caracas y deben estar ordenados por edad
 /*
 2-
 https://www.youtube.com/watch?v=gsEqU_OFx8Y&list=PLzHaXzj_WAym4WR3gBYuy1iew5T3NgL0v&index=27
+Controladores
+https://www.youtube.com/watch?v=7NS99CxiLWc&list=PLzHaXzj_WAym4WR3gBYuy1iew5T3NgL0v&index=21
 */
