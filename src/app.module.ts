@@ -1,13 +1,16 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { UsersController } from './users/users.controller';
+
+
 import { UsersModule } from './modules/users/users.module';
-import { UsersService } from './users/users.service';
 
 @Module({
   imports: [UsersModule],
-  controllers: [AppController, UsersController],
-  providers: [AppService, UsersService],
+  
 })
 export class AppModule {}
+
+
+/*
+Implementacion de modulos
+https://www.youtube.com/watch?v=FPiEDkTwa9k&list=PLzHaXzj_WAym4WR3gBYuy1iew5T3NgL0v&index=30&t=6s
+*/

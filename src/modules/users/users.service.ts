@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { NotFoundException } from '@nestjs/common/exceptions';
+import { CreateUserDto, UpdateUserDto } from './dto';
 
 import { User } from './user.entity';
 
@@ -32,13 +33,17 @@ export class UsersService {
         return user
     }
 
-    createUser(message: string){
+    /*
+    Transformacion de data en DTO: mirar en el minuto 8
+    https://www.youtube.com/watch?v=QUWilnAp45M&list=PLzHaXzj_WAym4WR3gBYuy1iew5T3NgL0v&index=33&t=336s
+    */
+    createUser({ message }: CreateUserDto){
         return this.users.push({
             id: (Math.floor(Math.random() * 2000) + 1).toString(), message
         });
     }
 
-    updateUser(id:string, message: any){
+    updateUser(id:string, { message }: UpdateUserDto){
         const user: User = this.getUser(id);
         user.message = message;
         
